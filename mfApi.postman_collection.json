@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "7d111627-d150-4f0c-85be-5b387f1b5a5b",
+		"name": "Move Files Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12917443"
+	},
+	"item": [
+		{
+			"name": "https://{{server}}/api/movefiles",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "dubX6LRVdCy3tjMsuUQPc8nfk2Xb2T6VAvfVz6EkTH6qQUwehn9CWuaUB92yhNwDs9av",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://{{server}}/api/movefiles",
+					"protocol": "https",
+					"host": [
+						"{{server}}"
+					],
+					"path": [
+						"api",
+						"movefiles"
+					],
+					"query": [
+						{
+							"key": "api_token",
+							"value": "dubX6LRVdCy3tjMsuUQPc8nfk2Xb2T6VAvfVz6EkTH6qQUwehn9CWuaUB92yhNwDs9av",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
