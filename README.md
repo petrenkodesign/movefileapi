@@ -1,4 +1,4 @@
-# Move files API # v.1.0.0
+# Move files API # v.1.0.1
 
 ## Requirements
 
@@ -30,15 +30,15 @@ generate ssh on the origin server:
 create or copy existing .env file to project root:\
 
 ### .env dependencies:
-- API_TOKEN - static token for API requests 
-- SERVER_SRC_IP - IP of the server from which files should be copied 
-- SERVER_POINT_IP - IP of the server to which the files are copied 
-- SERVER_SRC_DIR - directory from which the files are copied 
-- SERVER_POINT_DIR - directory to which the files are copied 
-- FILES_MASK - files mask 
-- SERVER_POINT_USER - destination server user 
-- SERVER_SSHKEY - path to the key file 
- 
+- API_TOKEN - static token for API requests
+- SERVER_SRC_IP - IP of the server from which files should be copied
+- SERVER_POINT_IP - IP of the server to which the files are copied
+- SERVER_SRC_DIR - directory from which the files are copied
+- SERVER_POINT_DIR - directory to which the files are copied
+- FILES_MASK - files mask
+- SERVER_POINT_USER - destination server user
+- SERVER_SSHKEY - path to the key file
+
 
 use this endpoint to move files [authorization key parameter -> api_token, method -> GET]:
 
