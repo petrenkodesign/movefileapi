@@ -19,3 +19,7 @@ Route::middleware('api_token')->get('/movefiles', function (Request $request) {
     return (new MoveFiles)->move();
 });
 
+Route::middleware('api_token')->get('/multimove', function (Request $request) {
+    return (new MoveFiles)->multimove();
+});
+
