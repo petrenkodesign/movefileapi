@@ -70,13 +70,17 @@ class MoveFiles extends Controller
 
           } else { // if the source is different from the destination
 
-            // connect to remote server by ssh
-            $command = 'echo "' . $rem_key . '" | ssh -i /dev/stdin -p ' . $rem_port . ' -o StrictHostKeyChecking=no '. $rem_user .'@'. $rem_ip;
-            // create tunel for source server
-            $command .= ' \'echo "' . $src_key . '" | ssh -o StrictHostKeyChecking=no -o ClearAllForwardings=yes -i /dev/stdin -L 2222:localhost:' . $src_port . ' -Nf ' . $src_user . '@' . $src_ip;
-            // rsync -avP --ignore-existing -e "ssh -p localport -o StrictHostKeyChecking=no " user@localhost:/src/dir/*.xml /remote/dir/
-            $command .= '&&rsync -avP ' . $ief_opt . $max_size . $rm_src . ' -e "ssh -o StrictHostKeyChecking=no -p 2222" '. $src_user .'@localhost:' . $src_dir . $file_mask . ' ' . $rem_dir;
-            $command .= '&&exit\' 2>&1';
+            // tunel for source server
+            $command = 'echo "' . $src_key . '" | ssh -o StrictHostKeyChecking=no -o ClearAllForwardings=yes -i /dev/stdin -L 2222:localhost:' . $src_port . ' -Nf ' . $src_user . '@' . $src_ip;
+            // moving files from source to temp local directory
+            $command .= '&&rsync -avP ' . $ief_opt . $max_size . $rm_src . ' -e "ssh -o StrictHostKeyChecking=no -p 2222" '. $src_user .'@localhost:' . $src_dir . $file_mask . ' ' . storage_path('tmp/');
+
+            // tunel for remote server
+            $command .= '&&echo "' . $rem_key . '" | ssh -o StrictHostKeyChecking=no -o ClearAllForwardings=yes -i /dev/stdin -L 2222:localhost:' . $rem_port . ' -Nf ' . $rem_user . '@' . $rem_ip;
+            // moving files from temp local directory to remote server
+            $command .= '&&rsync -avP --delete -e "ssh -o StrictHostKeyChecking=no -p 2222" ' . storage_path('tmp/') . $file_mask . ' ' . $rem_user .'@localhost:' . $rem_dir;
+            // remove all files from temp local dir
+            $command .= '&&rm -r ' . storage_path('tmp/') . '* 2>&1';
 
             exec($command, $output);
           }
