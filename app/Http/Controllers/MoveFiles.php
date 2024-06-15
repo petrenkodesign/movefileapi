@@ -45,8 +45,8 @@ class MoveFiles extends Controller
           $rem_user = $cline[7] ?? env('SERVER_REM_USER');
           $src_port = $cline[8] ?? env('SSH_PORT');
           $rem_port = $cline[9] ?? env('SSH_PORT');
-          $src_key = $cline[10] ?? env('SERVER_SRC_RSA_STRING');
-          $rem_key = $cline[11] ?? env('SERVER_REM_RSA_STRING');
+          $src_key = ( !empty($cline[13]) ) ? file_get_contents($cline[13]) : ( $cline[10] ?? env('SERVER_SRC_RSA_STRING') );
+          $rem_key = ( !empty($cline[14]) ) ? file_get_contents($cline[14]) : ( $cline[11] ?? env('SERVER_REM_RSA_STRING') );
           $ief_opt = ( !empty($cline[12]) || env('IGNORE_EXISTING_FILES') ) ? '--ignore-existing' : '';
           $max_size = ( !empty( env('FILE_MAX_SIZE') ) ) ? ' --max-size=' . env('FILE_MAX_SIZE') : '';
 
